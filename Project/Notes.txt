@@ -1,0 +1,7 @@
+Sans abs, mean, dist 0.8 : pas bien
+idem, poinds 0.7 : spermatozoide
+mediane sans abs, dist dist 0.9 : looping
+mean c-est de la merde
+
+mediane avec rogerstanimoto : NO
+mediane avec cosine : C à l'envers
