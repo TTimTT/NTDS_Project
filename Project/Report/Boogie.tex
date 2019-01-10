@@ -1,4 +1,5 @@
 \section{Introduction}
+
 It can be tough to know what we would like to listen when faced with an archive of thousand of musics. For our project we wondered how we could automatically generate a list of songs that would correspond to one's taste. We will explore the features of the Free Music Archive (FMA) to generate a graph that will contain many songs of selected genres. These songs can then be sorted and a playlist be generated out of a region of this graph. We will explore different methods of generating playlists. At the end, 
 we will show how this tool can be used to generate a free alternative playlists from non-free musics.
 
@@ -15,7 +16,7 @@ Since processing the graph and placing the nodes in a 2D space requires an impor
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=\linewidth] {figures/•}
+\includegraphics[width=\linewidth] {figures/graph_2}
 \caption{Spring layout coloured by genre}
 \label{fig:spring_layout}
 \end{figure}
@@ -39,9 +40,9 @@ An example of a 2D-Tree is presented in the figure~(\ref{fig:ex_tree})
 This kind of structure is conceived to quickly find the nearest neighbours in an efficient way.
 We decided to consider that the closest neighbour to our newly included song, in the features space, is going to be assimilated to the new node. Hence, when we want to extract a playlist, this existing node will be used. %TODO
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
-    %\includegraphics[width=\textwidth]{./Figures/beta}
+    \includegraphics[width=\textwidth]{./Figures/tree}
   \caption{Example of a 2D-Tree}
   \label{fig:ex_tree}
 \end{figure}
@@ -62,17 +63,19 @@ First, we can create a playlist directly from the euclidean distance between fea
 Secondly, we select the closest songs around the selected music (node) in the graph. This effectively results in a kind of circle around a point. This type of playlist will thus be very targeted towards a specific kind of song. For this purpose we use the simple euclidean distance in our 2D graph.
 
 \subsection{Graph heat diffusion}
-Finally, we generate a heat diffusion around selected nodes, and create a playlist from the "warmest" nodes. This selection should result in a kind of path between different closely connected songs. 	
-When listening to a playlist, it is nice to be able to tell how adventurous we feel regarding the inclusion of other styles. We thus leave the choice to the user to select its own prefered playlist generation.
+Finally, we generate a heat diffusion around selected nodes, and create a playlist from the "warmest" nodes. To simulate this heat diffusion in the graph, we use the functions of PyGSP allowing us to generate the heat kernel filter and apply it to our graph. We provide a graph in node domain but the filtering is performed in frequency domain.\\
 
+With this method it is possible to mix the diffusion from each starting node which result to a playlist being between every given song. For example, if we give a rock song and a rap song, we will get some songs which are fusions of rock and rap.
 
+This selection should result in a kind of path between different closely connected songs.When listening to a playlist, it is nice to be able to tell how adventurous we feel regarding the inclusion of other styles. Therefore we let the user choose the heat diffusion parameter "tau". 
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
-    %\includegraphics[width=\textwidth]{./Figures/beta}
-  \caption{}
+    \includegraphics[width=\textwidth]{./Figures/heat}
+  \caption{Heat spreading starting from one node(green marker)}
   \label{fig:}
 \end{figure}
 
+\newpage
 \section{Conclusion}
 

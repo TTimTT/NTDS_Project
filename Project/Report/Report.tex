@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt,oneside]{scrartcl}
+\documentclass[a4paper,11pt,oneside]{article}
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc} 
@@ -20,20 +20,18 @@
 \usepackage{pdfpages}
 \usepackage{blindtext}
 \usepackage{todonotes}
-
 \usepackage[headsepline=1pt]{scrlayer-scrpage}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{setspace}
 
-
-
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \newcommand{\mail}[1]{{\href{mailto:#1}{#1}}}
 \newcommand{\ftplink}[1]{{\href{ftp://#1}{#1}}}
+\setstretch{1.3}
+
 
 %\pagestyle{fancy}
-%\fancyhead[LE,RO]{L. Biotto \& J. Tapparel \& T. Tuuva}
-%\fancyhead[LO,RE]{\slshape \textbf{TP Technologie de l'information}: Antenne}
 %\fancyfoot[C]{\thepage}
-
 
 \title{\textbf{Network Tour of DataScience}:\\ \normalfont Free Music Alternative Playlists}
 \author{A. Buchegger \& L. Biotto \& J. Tapparel \& T. Tuuva}
@@ -44,12 +42,10 @@
 \automark*{subsection}
 \clearpairofpagestyles
 \ihead{\headmark}
-%\ohead{\pagemark}
-
+ 
 
 
 \begin{document}
-
 \lstset{language=Matlab,%
     %basicstyle=\color{red},
     breaklines=true,%
