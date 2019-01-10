@@ -9,7 +9,7 @@ we will show how this tool can be used to generate a free alternative playlists 
 
 To include our own music into the graph we first need to extract its features, this is done by using
 the provided features.py script(TODO REF), there are 518 features in total.
-Then we can include the song in to ways:
+Then we can include the song in two ways:
 \begin{itemize}
 \item Recompute the graph adjacency matrix for every included songs
 \item Create a KD-Tree of the graph, then search the nearest point in the K-features space for the included songs
@@ -19,10 +19,18 @@ Then we can include the song in to ways:
 TODO
 
 \subsection{Inclusion by KD-Tree}
-Instead of using the adjacency matrix, we can generate another kind of graph directly from the
-features, in our case it is a KD-Tree.
-This tree is constructed in the following way: first of all, we need to retrieve all the connected nodes in the graph and for each node we construct the tree based on the features.
-TODO
+Instead of recomputing the adjacency matrix and the corresponding graph which has a high computation cost, we can generate another kind of graph directly from the features, in our case we chose a KD-Tree.
+An example of a 2D-Tree is presented in the figure~(\ref{fig:ex_tree})
+
+This kind of structure is conceived to quickly find the nearest neighbour in an effecient way.
+We decided to consider that the closest neighbour to our newly included song in the feature space are the same node. Hence, when we want to extract a playlist in the other methods, we will use the representating node as the new song. %TODO
+
+\begin{figure}[h!]
+  \centering
+    %\includegraphics[width=\textwidth]{./Figures/beta}
+  \caption{Example of a 2D-Tree}
+  \label{fig:ex_tree}
+\end{figure}
 
 \section{Generating the playlist}
 
