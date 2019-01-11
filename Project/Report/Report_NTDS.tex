@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper,twoside]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[french]{babel}
+\usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -22,6 +22,7 @@
 \usepackage{fourier}
 \usepackage[outer=2.5cm,inner=2.5cm, top=3cm, bottom=3cm]{geometry}
 \usepackage{float}
+\usepackage{cite}
 \pagestyle{fancy}
 \fancyhead[L]{Network Tour of Data Science}
 \fancyhead[R]{Free Music Alternative Playlists}
@@ -51,18 +52,18 @@ This would give us a strongly connected graph which would be long to process due
 
 Finally we place each node in a bi-dimensional space using a spring layout. This means that each node tries to get as far away from the others as it can, while being held back by the edges which are assimilated to springs, having a spring constant related to their corresponding weight.\\
 
-Since processing the graph and placing the nodes in a 2D space requires an important amount of time, we limited the dataset to three balanced genres. The result of the created graph is presented on the figure \ref{fig:spring_layout}. However, these parameters can be chosen by the user at the moment he creates his own graph depending of his time and resources. Moreover, adding more genres seem to make them less distinguishible by using this graph calculation. More clever use of the features would probably help. For example, by using machine learning, we could tweak the weight of each feature to better separate more genres.
+Since processing the graph and placing the nodes in a 2D space requires an important amount of time, we limited the dataset to three balanced genres. The result of the created graph is presented on the figure~(\ref{fig:spring_layout}). However, these parameters can be chosen by the user at the moment he creates his own graph depending of his time and resources. Moreover, adding more genres seem to make them less distinguishible by using this graph calculation. More clever use of the features would probably help. For example, by using machine learning, we could tweak the weight of each feature to better separate more genres.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth] {figures/graph_2}
+\includegraphics[width=0.9\textwidth] {./Figures/graph_2}
 \caption{Spring layout coloured by genre}
 \label{fig:spring_layout}
 \end{figure}
 \section{Including our own songs}
 
 To include our own music into the graph we first need to extract its features, this is done by using
-the provided \textit{features.py} script(TODO REF). There are 518 features in total.
+the provided \textit{features.py} script\cite{fma_dataset}. There are 518 features in total.
 Then we can include the song in two ways:
 \begin{itemize}
 \item Recomputing the graph adjacency matrix with the new songs included.
@@ -84,7 +85,7 @@ We decided to consider that the closest neighbour to our newly included song, in
 \begin{figure}[H]
   \centering
     \includegraphics[width=.7\textwidth]{./Figures/tree}
-  \caption{Example of a 2D-Tree}
+  \caption{Example of a 2D-Tree [\href{http://what-when-how.com/advanced-methods-in-computer-graphics/collision-detection-advanced-methods-in-computer-graphics-part-6/}{source}]}
   \label{fig:ex_tree}
 \end{figure}
 
@@ -125,5 +126,8 @@ By listening to the generated playlists, we can observe that the extracted songs
 It is interesting to note that using only the 2D graph, we get good results, confirming a good classification of the songs. 
 
 By using what we learned during the course and the project milestones, we were able to gain and use some knowledge on graphs and Python to generate awesome playlists.
+
+\bibliography{bibliography}{}
+\bibliographystyle{plain}
 
 \end{document}
