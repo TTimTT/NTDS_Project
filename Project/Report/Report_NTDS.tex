@@ -40,19 +40,19 @@
 
 \section{Introduction}
 
-It can be tough to know what we would like to listen when faced with an archive of thousand of musics. For our project we wondered how we could automatically generate a list of songs that would correspond to one's taste. We will explore the features of the Free Music Archive (FMA) to generate a graph that will contain many songs of selected genres. These songs can then be sorted and a playlist be generated out of a region of this graph. We will explore different methods of generating playlists. At the end, we will show how this tool can be used to generate a free alternative playlists from non-free musics.
+It can be tough to know what we would like to listen when faced with an archive of thousand of musics. For our project we wondered how we could automatically generate a list of songs that would correspond to one's taste. We will explore the features of the Free Music Archive (FMA) to generate a graph that will contain many songs of selected genres. These songs can then be sorted and a playlist be generated out of a region of this graph. We will explore different methods of generating playlists. At the end, we will show how this tool can be used to generate a free alternative playlist from non-free musics.
 
 \section{Generating the graph}
-Thanks to Free Music Archive, we have access to a dataset of music from which we have a list of extracted features. In order to construct a graph from this song list, we considered each song as a node and calculated distance between each node in the features space. We normalized all these features to a same weight. After trying different distances, the euclidean one seems to give us the best separation between genres which could indicate that similar songs would end up close to one another. We can then use these distances to define the weight of the edges between each nodes using the following formula:
+Thanks to Free Music Archive, we have access to a dataset of music from which we have a list of extracted features. In order to construct a graph from this songs list, we considered each song as a node and calculated the distance between all nodes in the features space. We normalized all these features to a same weight. After trying different distances, the euclidean one seems to give us the best separation between genres which could indicate that similar songs would end up close to one another. We can then use these distances to define the weight of the edges between each nodes using the following formula:
 $$
 \text{Edge}_{\text{weight}}=e^{-\text{dist}^2/\text{dist}_{\text{mean}}^2}
 $$
 
-This would give us a strongly connected graph which would be long to process due to the high number of edges and having weakly weighted edges doesn't give very useful informations about the data structure. We can solve this problem by defining a minimal weight to keep an edge in the graph. One issue in doing that is the apparition of multiple components in the graph. For the future usage of this graph, we need it to be connected and to ensure that, we will only take into account the principal connected component and drop the nodes that aren't in it. In our implementation, we set the threshold value in order ensure that around 90\% of the nodes are in the main component.\\
+This would give us a strongly connected graph which would be long to process due to the high number of edges. Having weakly weighted edges doesn't give very useful informations about the data structure. We can solve this problem by defining a minimal weight to keep an edge in the graph. One issue in doing that is the apparition of multiple components in the graph. For the future usage of this graph, we need it to be connected and to ensure that, we will only take into account the principal connected component and drop the nodes that aren't in it. In our implementation, we set the threshold value in order ensure that around 90\% of the nodes are in the main component.\\
 
 Finally we place each node in a bi-dimensional space using a spring layout. This means that each node tries to get as far away from the others as it can, while being held back by the edges which are assimilated to springs, having a spring constant related to their corresponding weight.\\
 
-Since processing the graph and placing the nodes in a 2D space requires an important amount of time, we limited the dataset to three balanced genres. The result of the created graph is presented on the figure~(\ref{fig:spring_layout}). However, these parameters can be chosen by the user at the moment he creates his own graph depending of his time and resources. Moreover, adding more genres seem to make them less distinguishible by using this graph calculation. More clever use of the features would probably help. For example, by using machine learning, we could tweak the weight of each feature to better separate more genres.
+Since processing the graph and placing the nodes in a 2D space requires an important amount of time, we limited the dataset to three balanced genres. The result of the created graph is presented on the figure~(\ref{fig:spring_layout}). However, these parameters can be chosen by the user at the moment he is creating his own graph depending of his time and resources. Moreover, adding more genres seem to make them less distinguishible by using this graph calculation. More clever use of the features would probably help. For example, by using machine learning, we could tweak the weight of each feature to better separate more genres.
 
 \begin{figure}[H]
 \centering
@@ -68,7 +68,7 @@ Then we can include the song in two ways:
 \begin{itemize}
 \item Recomputing the graph adjacency matrix with the new songs included.
 
-\item Creating a KD-Tree of the graph, then searching for the nearest points in the K-features space for the included songs
+\item Creating a KD-Tree of the graph, then searching for the nearest points in the K-features space for the included songs.
 \end{itemize}
 
 
@@ -98,7 +98,7 @@ To generate a playlist we explored three distinct methods:
 \item Hottest nodes from a heat diffusion in the graph
 \end{itemize}
 
-When listening to a playlist, it is nice to be able to tell how adventurous we feel regarding the inclusion of other styles or genres. Therefore we let the user the freedom to choose its own preferred generation method. 
+When listening to a playlist, it is nice to be able to tell how adventurous we feel regarding the inclusion of other styles or genres. We therefore let the user the freedom to choose its own preferred generation method. 
 
 \subsection{518D features exploration}
 First, we can create a playlist directly from the euclidean distance between features. This property should result in similar features, such as rythm, or height of voice of example, but being more adventurous in regards to genres. One could for example end up listening to hip-hop when starting from rock.
